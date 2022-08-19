@@ -88,7 +88,7 @@ BUCKET=" "
 &nbsp;
 &nbsp;    
 ### ERD
-`ERD HERE`
+![](app/images/ERD%20(2).png)
 &nbsp;
 &nbsp;
 ## Schema
