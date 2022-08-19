@@ -8,6 +8,7 @@ const exampleRoutes = require('./app/routes/example_routes')
 const userRoutes = require('./app/routes/user_routes')
 const projectRoutes = require('./app/routes/project_routes')
 const uploadRoutes = require('./app/routes/upload_routes')
+const developerRoutes = require('./app/routes/developer_routes')
 
 // require middleware
 const errorHandler = require('./lib/error_handler')
@@ -68,6 +69,7 @@ app.use(requestLogger)
 
 // register route files
 app.use(projectRoutes)
+app.use(developerRoutes)
 app.use(uploadRoutes)
 app.use(exampleRoutes)
 app.use(userRoutes)

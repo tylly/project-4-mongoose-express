@@ -4,8 +4,8 @@ const express = require("express");
 const passport = require("passport");
 
 // pull in Mongoose model for projects
-const Project = require("../models/project");
 const Developer = require("../models/developer");
+const Project = require('../models/project')
 
 // this is a collection of methods that help us detect situations when we need
 // to throw a custom error
@@ -30,19 +30,20 @@ const router = express.Router();
 
 // INDEX 
 // GET /projects
-router.get("/projects", (req, res, next) => {
+router.get("/developers", (req, res, next) => {
+  console.log('hey')
   //we want anyone to see projects so no requireToken
   //if we wanted to protect resources we could add that back in between
   //route and callback as second argument
-  Project.find()
-    .then((projects) => {
+  Developer.find()
+    .then((developers) => {
       // `projects` will be an array of Mongoose documents
       // we want to convert each one to a POJO, so we use `.map` to
       // apply `.toObject` to each one
-      return projects.map((project) => project.toObject());
+      return developers.map((developer) => developer.toObject());
     })
     // respond with status 200 and JSON of the projects
-    .then((projects) => res.status(200).json({ projects: projects }))
+    .then((developers) => res.status(200).json({ developers: developers }))
     // if an error occurs, pass it to the handler
     .catch(next);
 });
@@ -50,14 +51,14 @@ router.get("/projects", (req, res, next) => {
 
 // CREATE
 // POST /destinations
-router.post("/projects/", requireToken, (req, res, next) => {
+router.post("/developers/", requireToken, (req, res, next) => {
 	console.log('hit')
   // set owner of new projectss to be current user
-  req.body.project.owner = req.user.id;
-  Project.create(req.body.project)
+  req.body.developer.owner = req.user.id;
+  Developer.create(req.body.developer)
   // respond to succesful `git statuscreate` with status 201 and JSON of new "project"
-  .then((project) => {
-    res.status(201).json({ project: project.toObject() });
+  .then((developer) => {
+    res.status(201).json({ developer: developer.toObject() });
   })
   .catch(next);
 });
@@ -66,12 +67,12 @@ router.post("/projects/", requireToken, (req, res, next) => {
 // GET 
 router.get("/:id", (req, res, next) => {
   // req.params.id will be set based on the `:id` in the route
-  Project.findById(req.params.id)
+  Developer.findById(req.params.id)
  
     .then(handle404)
     // if `findById` is succesful, respond with 200 and "project" JSON
-    .then((project) =>
-      res.status(200).json({ project: project.toObject() })
+    .then((developer) =>
+      res.status(200).json({ developer: developer.toObject() })
     )
     // if an error occurs, pass it to the handler
     .catch(next);
@@ -79,20 +80,20 @@ router.get("/:id", (req, res, next) => {
 
 // UPDATE
 // PATCH /projects/5a7db6c74d55bc51bdf39793
-router.patch( "/projects/:id", requireToken, removeBlanks, (req, res, next) => {
+router.patch( "/developers/:id", requireToken, removeBlanks, (req, res, next) => {
     // if the client attempts to change the `owner` property by including a new
     // owner, prevent that by deleting that key/value pair
-    delete req.body.project.owner;
+    delete req.body.developer.owner;
 
-    Project.findById(req.params.id)
+    Developer.findById(req.params.id)
       .then(handle404)
-      .then((project) => {
+      .then((developer) => {
         // pass the `req` object and the Mongoose record to `requireOwnership`
         // it will throw an error if the current user isn't the owner
-        requireOwnership(req, project);
+        requireOwnership(req, developer);
 
         // pass the result of Mongoose's `.update` to the next `.then`
-        return project.updateOne(req.body.project);
+        return developer.updateOne(req.body.developer);
       })
       // if that succeeded, return 204 and no JSON
       .then(() => res.sendStatus(204))
@@ -103,14 +104,14 @@ router.patch( "/projects/:id", requireToken, removeBlanks, (req, res, next) => {
 
 // DESTROY
 // DELETE 
-router.delete("/projects/:id", requireToken, (req, res, next) => {
-    Project.findById(req.params.id)
+router.delete("/developers/:id", requireToken, (req, res, next) => {
+  Developer.findById(req.params.id)
     .then(handle404)
-    .then((project) => {
+    .then((developer) => {
       // throw an error if current user doesn't own `project`
-      requireOwnership(req, project);
+      requireOwnership(req, developer);
       // delete the project ONLY IF the above didn't throw
-      project.deleteOne();
+      developer.deleteOne();
     })
     // send back 204 and no content if the deletion succeeded
     .then(() => res.sendStatus(204))
@@ -120,14 +121,14 @@ router.delete("/projects/:id", requireToken, (req, res, next) => {
 
 // SHOW
 // GET 
-router.get("/projects/:id", (req, res, next) => {
+router.get("/developers/:id", (req, res, next) => {
     // req.params.id will be set based on the `:id` in the route
-    Project.findById(req.params.id)
+    Developer.findById(req.params.id)
    
       .then(handle404)
       // if `findById` is succesful, respond with 200 and "project" JSON
-      .then((project) =>
-        res.status(200).json({ project: project.toObject() })
+      .then((developer) =>
+        res.status(200).json({ developer: developer.toObject() })
       )
       // if an error occurs, pass it to the handler
       .catch(next);
