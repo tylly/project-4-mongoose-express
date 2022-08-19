@@ -1,13 +1,13 @@
 {
-  "name": "express-auth-mongoose-boilerplate",
+  "name": "project-hub-api",
   "version": "1.0.0",
-  "description": "Auth boilerplate for mongoose express using token auth",
+  "description": "GA Project 4 backend for ProjectHub",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Timm Schoenborn",
+  "author": "James Adams, Amanda Corral, Hayden Moyes, Shai Aloni",
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.1198.0",
