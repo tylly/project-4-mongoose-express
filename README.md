@@ -134,3 +134,22 @@ TBD
 ###### Mongoose JS - https://mongoosejs.com/
 ###### MongoDB - https://www.mongodb.com/
 ###### NPM JS - https://www.npmjs.com/
+
+# Index Page 
+![Read me Images](app/images/1.png)
+# Show Page 
+![Read me Images](app/images/2.png)
+# Show Page with Auth
+![Read me Images](app/images/3.png)
+# Create Page 
+![Read me Images](app/images/4.png)
+# Edit Page 
+![Read me Images](app/images/5.png)
+# Add Devs Page 
+![Read me Images](app/images/6.png)
+# Sign Up Page 
+![Read me Images](app/images/7.png)
+# Sign In Page 
+![Read me Images](app/images/8.png)
+# Sign Out Page 
+![Read me Images](app/images/9.png)
