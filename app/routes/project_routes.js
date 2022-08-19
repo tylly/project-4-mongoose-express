@@ -63,7 +63,7 @@ router.post("/projects/", requireToken, (req, res, next) => {
 
 // SHOW
 // GET 
-router.get("/:id", (req, res, next) => {
+router.get("/projects/:id", (req, res, next) => {
   // req.params.id will be set based on the `:id` in the route
   Project.findById(req.params.id)
  
@@ -117,19 +117,6 @@ router.delete("/projects/:id", requireToken, (req, res, next) => {
     .catch(next);
 });
 
-// SHOW
-// GET 
-router.get("/projects/:id", (req, res, next) => {
-    // req.params.id will be set based on the `:id` in the route
-    Project.findById(req.params.id)
-   
-      .then(handle404)
-      // if `findById` is succesful, respond with 200 and "project" JSON
-      .then((project) =>
-        res.status(200).json({ project: project.toObject() })
-      )
-      // if an error occurs, pass it to the handler
-      .catch(next);
-  });
+
 
 module.exports = router;
