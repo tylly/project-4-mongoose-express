@@ -40,7 +40,7 @@ router.get("/projects", (req, res, next) => {
       // apply `.toObject` to each one
       return projects.map((project) => project.toObject());
     })
-    // respond with status 200 and JSON of the snowboards
+    // respond with status 200 and JSON of the projects
     .then((projects) => res.status(200).json({ projects: projects }))
     // if an error occurs, pass it to the handler
     .catch(next);
@@ -54,7 +54,7 @@ router.post("/projects/", requireToken, (req, res, next) => {
   // set owner of new projectss to be current user
   req.body.project.owner = req.user.id;
   Project.create(req.body.project)
-  // respond to succesful `git statuscreate` with status 201 and JSON of new "snowboard"
+  // respond to succesful `git statuscreate` with status 201 and JSON of new "project"
   .then((project) => {
     res.status(201).json({ project: project.toObject() });
   })
@@ -68,7 +68,7 @@ router.get("/:id", (req, res, next) => {
   Project.findById(req.params.id)
  
     .then(handle404)
-    // if `findById` is succesful, respond with 200 and "snowboard" JSON
+    // if `findById` is succesful, respond with 200 and "project" JSON
     .then((project) =>
       res.status(200).json({ project: project.toObject() })
     )
@@ -106,9 +106,9 @@ router.delete("/projects/:id", requireToken, (req, res, next) => {
     Project.findById(req.params.id)
     .then(handle404)
     .then((project) => {
-      // throw an error if current user doesn't own `snowboard`
+      // throw an error if current user doesn't own `project`
       requireOwnership(req, project);
-      // delete the snowboard ONLY IF the above didn't throw
+      // delete the project ONLY IF the above didn't throw
       project.deleteOne();
     })
     // send back 204 and no content if the deletion succeeded
@@ -124,7 +124,7 @@ router.get("/projects/:id", (req, res, next) => {
     Project.findById(req.params.id)
    
       .then(handle404)
-      // if `findById` is succesful, respond with 200 and "snowboard" JSON
+      // if `findById` is succesful, respond with 200 and "project" JSON
       .then((project) =>
         res.status(200).json({ project: project.toObject() })
       )
