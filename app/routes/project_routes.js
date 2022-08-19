@@ -98,7 +98,7 @@ router.patch( "/projects/:id", requireToken, removeBlanks, (req, res, next) => {
       // if an error occurs, pass it to the handler
       .catch(next);
   }
-);
+)
 
 // DESTROY
 // DELETE 
