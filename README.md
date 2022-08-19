@@ -44,14 +44,17 @@ BUCKET=" "
 - As a signed in user, I would like to create a new project.
 - As a signed in user, I would like to edit my existing project.
 - As a signed in user, I would like to delete my existing project.
-- As a signed in user, I would like to see all my developers profiles. 
+- As a signed in user, I would like to see all my developers profiles.
+- As a signed in user, I would like to see in detail one developer profile. 
 - As a signed in user, I would like to create a new developer profile.
 - As a signed in user, I would like to edit my existing devloper profile.
 - As a signed in user, I would like to delete an existing developer profile.
 
  
 ### Stretch Goals
-TBD
+- likes
+- comments
+- project rating system
 &nbsp;
 &nbsp;
 ## Route Table
@@ -73,13 +76,14 @@ TBD
    | PATCH  | `/projects/:projectId`  | `projects # update`|
    | DELETE | `/projects/:projectId`  | `projects # destroy`|
 
-- ### User Authentication
+- ### Developer routes
    | Verb   | URI Pattern         | Controller#Action |
    | ------ | ------------------- | ----------------- |
-   | POST   | `/sign-up`          | `users # signup`    |
-   | POST   | `/sign-in`          | `users # signin`    |
-   | PATCH  | `/change-password/` | `users # changepw`  |
-   | DELETE | `/sign-out/`        | `users # signout `  |
+   | GET   | `/developers` | `developers # index`    |
+    | GET   | `/developers/:devId`| `developers # show`    |
+   | POST   | `/developers` | `add # add`    |
+   | PATCH  | `/developers/:devId` | `developers # update`  |
+   | DELETE | `/developers/:devId` | `developers # destroy `  |
 
 &nbsp;
 &nbsp;    
@@ -102,6 +106,7 @@ TBD
   
 - ### Project
    - title: String
+   - description: String
    - tags: [ ]
    - image: url(?) w aws
    - deployment: String
