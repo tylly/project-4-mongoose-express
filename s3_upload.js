@@ -6,7 +6,6 @@ const s3 = new AWS.S3({apiVersion: '2006-03-01'})
 
 // Read the file elsewhere, accept it here
 module.exports = function (file) {
-
     console.log(file.mimetype)
     const uploadParams = {
         Bucket: process.env.BUCKET, 
