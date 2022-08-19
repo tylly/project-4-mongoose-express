@@ -1,7 +1,7 @@
-const { urlencoded } = require("express");
-const mongoose = require("mongoose");
+const { urlencoded } = require("express")
+const mongoose = require("mongoose")
 
-const { Schema, model } = mongoose;
+const { Schema, model } = mongoose
 
 const projectSchema = new Schema(
   {
@@ -33,6 +33,6 @@ const projectSchema = new Schema(
   {
     timestamps: true,
   }
-);
+)
 
-module.exports = mongoose.model("Project", projectSchema);
+module.exports = mongoose.model("Project", projectSchema)
