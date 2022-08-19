@@ -1,8 +1,6 @@
 const { urlencoded } = require("express");
 const mongoose = require("mongoose");
 
-const developerSchema = require("./developer");
-
 const { Schema, model } = mongoose;
 
 const projectSchema = new Schema(
@@ -21,7 +19,11 @@ const projectSchema = new Schema(
     img: String,
     front_end_repo: String,
     back_end_repo: String,
-    developers: [developerSchema],
+    developers: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Developer",
+      required: false,
+    }],
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
