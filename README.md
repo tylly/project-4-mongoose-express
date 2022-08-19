@@ -40,11 +40,15 @@ BUCKET=" "
 - As a registered user, I would like to sign in with an email and password.
 - As a signed in user, I would like to change my password.
 - As a signed in user, I would like to sign out.
-- As a signed in user, I would like to see all my projects.
-- As a signed in user, 
+- As a signed in user, I would like to see all my projects. 
 - As a signed in user, I would like to create a new project.
 - As a signed in user, I would like to edit my existing project.
 - As a signed in user, I would like to delete my existing project.
+- As a signed in user, I would like to see all my developers profiles. 
+- As a signed in user, I would like to create a new developer profile.
+- As a signed in user, I would like to edit my existing devloper profile.
+- As a signed in user, I would like to delete an existing developer profile.
+
  
 ### Stretch Goals
 TBD
@@ -58,6 +62,7 @@ TBD
    | POST   | `/sign-in`          | `users # signin`    |
    | PATCH  | `/change-password/` | `users # changepw`  |
    | DELETE | `/sign-out/`        | `users # signout `  |
+
 - ### Projects
    | Verb   | URI Pattern | Controller#Action    |
    | ------ | ----------- | -------------------- |
@@ -68,7 +73,14 @@ TBD
    | PATCH  | `/projects/:projectId`  | `projects # update`|
    | DELETE | `/projects/:projectId`  | `projects # destroy`|
 
-   
+- ### User Authentication
+   | Verb   | URI Pattern         | Controller#Action |
+   | ------ | ------------------- | ----------------- |
+   | POST   | `/sign-up`          | `users # signup`    |
+   | POST   | `/sign-in`          | `users # signin`    |
+   | PATCH  | `/change-password/` | `users # changepw`  |
+   | DELETE | `/sign-out/`        | `users # signout `  |
+
 &nbsp;
 &nbsp;    
 ### ERD
@@ -106,7 +118,7 @@ TBD
 &nbsp;
  
 ## Development Roles
-- Team Manager: James Adams
+- Project Overlord: James Adams
 - Front-End SME: Amanda Corral
 - Back-End SME: Hayden Moyes
 - General Dev: Shai Aloni
