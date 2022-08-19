@@ -1,10 +1,10 @@
-# SEIR Project  `Project name` - API
+# SEIR Project  `Project hub` - API
  
 This is the backend app, designed to work with the client app.
 Repo to the client app is here:
 https://github.com/tylly/project-4-react
  
-## About `Project name`
+## About `Project hub`
  
 ## Technology
 We will be using a Node server, with Mongoose and Express for our back end app, that will support full CRUD actions.
@@ -33,24 +33,7 @@ AWS_ACCESS_KEY_ID=" "
 AWS_SECRET_ACCESS_KEY=" "
 BUCKET=" "
  
-### User Story
-- As an unregistered user, I would like to view all projects filtered with tags.
-- As an unregistered user, I would like to see one project in detail.
-- As an unregistered user, I would like to sign up with an email and password.
-- As a registered user, I would like to sign in with an email and password.
-- As a signed in user, I would like to change my password.
-- As a signed in user, I would like to sign out.
-- As a signed in user, I would like to see all my projects. 
-- As a signed in user, I would like to create a new project.
-- As a signed in user, I would like to edit my existing project.
-- As a signed in user, I would like to delete my existing project.
-- As a signed in user, I would like to see all my developers profiles.
-- As a signed in user, I would like to see in detail one developer profile. 
-- As a signed in user, I would like to create a new developer profile.
-- As a signed in user, I would like to edit my existing devloper profile.
-- As a signed in user, I would like to delete an existing developer profile.
 
- 
 ### Stretch Goals
 - likes
 - comments
@@ -88,7 +71,7 @@ BUCKET=" "
 &nbsp;
 &nbsp;    
 ### ERD
-![](app/images/ERD%20(2).png)
+![](app/images/ERD%203.48.59%20PM.png)
 &nbsp;
 &nbsp;
 ## Schema
@@ -135,21 +118,4 @@ TBD
 ###### MongoDB - https://www.mongodb.com/
 ###### NPM JS - https://www.npmjs.com/
 
-# Index Page 
-![Read me Images](app/images/1.png)
-# Show Page 
-![Read me Images](app/images/2.png)
-# Show Page with Auth
-![Read me Images](app/images/3.png)
-# Create Page 
-![Read me Images](app/images/4.png)
-# Edit Page 
-![Read me Images](app/images/5.png)
-# Add Devs Page 
-![Read me Images](app/images/6.png)
-# Sign Up Page 
-![Read me Images](app/images/7.png)
-# Sign In Page 
-![Read me Images](app/images/8.png)
-# Sign Out Page 
-![Read me Images](app/images/9.png)
+
