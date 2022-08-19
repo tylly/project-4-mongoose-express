@@ -73,6 +73,7 @@ app.use(developerRoutes)
 app.use(uploadRoutes)
 app.use(exampleRoutes)
 app.use(userRoutes)
+app.use(developerRoutes)
 
 // register error handling middleware
 // note that this comes after the route middlewares, because it needs to be

@@ -8,11 +8,11 @@ const developerSchema = new mongoose.Schema(
 		},
 		linkedin: String,
 		github: String,
-		// owner: {
-		// 	type: mongoose.Schema.Types.ObjectId,
-		// 	ref: 'User',
-		// 	required: false,
-		// },
+		owner: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'User',
+			required: false,
+		},
 	},
 	{
 		timestamps: true,
