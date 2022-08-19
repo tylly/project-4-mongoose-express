@@ -179,3 +179,22 @@ Response:
 ```md
 HTTP/1.1 204 No Content
 ```
+
+# Index Page 
+![Read me Images](1.png)
+# Show Page 
+![Read me Images](2.png)
+# Show Page with Auth
+![Read me Images](3.png)
+# Create Page 
+![Read me Images](4.png)
+# Edit Page 
+![Read me Images](5.png)
+# Add Devs Page 
+![Read me Images](6.png)
+# Sign Up Page 
+![Read me Images](7.png)
+# Sign In Page 
+![Read me Images](8.png)
+# Sign Out Page 
+![Read me Images](9.png)
