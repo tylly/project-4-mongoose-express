@@ -10,6 +10,7 @@
   "author": "Timm Schoenborn",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.1198.0",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
