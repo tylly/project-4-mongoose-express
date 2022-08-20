@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
-
-const developerSchema = new mongoose.Schema(
+const { Schema, model } = mongoose
+const developerSchema = new Schema(
 	{
 		name: {
 			type: String,
@@ -8,8 +8,13 @@ const developerSchema = new mongoose.Schema(
 		},
 		linkedin: String,
 		github: String,
+		projects: [{
+			type: Schema.Types.ObjectId,
+			ref: "Project",
+			required: false,
+		  }],
 		owner: {
-			type: mongoose.Schema.Types.ObjectId,
+			type: Schema.Types.ObjectId,
 			ref: 'User',
 			required: false,
 		},
@@ -18,4 +23,4 @@ const developerSchema = new mongoose.Schema(
 		timestamps: true,
 	}
 )
-module.exports = mongoose.model('Developer', developerSchema)
+module.exports = model('Developer', developerSchema)
