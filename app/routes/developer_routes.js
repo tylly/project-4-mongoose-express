@@ -52,6 +52,20 @@ router.post('/developers', requireToken, (req, res, next) => {
 		.catch(next)
 })
 
+router.patch('/developers/addProj/:projectId/:devId', requireToken, removeBlanks, (req, res, next) => {
+	delete req.body.developer.owner
+
+	Developer.findById(req.params.devId)
+		.then(handle404)
+		.then((developer) => {
+			requireOwnership(req, developer)
+			developer.projects.push(req.params.projectId)
+			return developer.save()
+		})
+		.then(() => res.sendStatus(204))
+		.catch(next)
+})
+
 // UPDATE
 // PATCH /developers/5a7db6c74d55bc51bdf39793
 router.patch('/developers/:id', requireToken, removeBlanks, (req, res, next) => {
@@ -66,6 +80,7 @@ router.patch('/developers/:id', requireToken, removeBlanks, (req, res, next) => 
 		.then(() => res.sendStatus(204))
 		.catch(next)
 })
+
 
 // DESTROY
 // DELETE /developers/5a7db6c74d55bc51bdf39793
