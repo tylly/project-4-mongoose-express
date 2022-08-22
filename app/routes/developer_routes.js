@@ -29,6 +29,15 @@ router.get('/developers/:id', (req, res, next) => {
 		.catch(next)
 })
 
+// Get dev to add to project
+// GET /developers/name
+router.get('/developers/name/:name', (req, res, next) => {
+	Developer.findOne({name: {$regex: req.params.name}})
+		.then(handle404)
+		.then((developer) => res.status(200).json({ developer: developer.toObject() }))
+		.catch(next)
+})
+
 // CREATE
 // POST /developers
 router.post('/developers', requireToken, (req, res, next) => {
@@ -40,6 +49,20 @@ router.post('/developers', requireToken, (req, res, next) => {
 		.then((developer) => {
 			res.status(201).json({ developer: developer.toObject() })
 		})
+		.catch(next)
+})
+
+router.patch('/developers/addProj/:projectId/:devId', requireToken, removeBlanks, (req, res, next) => {
+	//delete req.body.developer.owner
+
+	Developer.findById(req.params.devId)
+		.then(handle404)
+		.then((developer) => {
+			requireOwnership(req, developer)
+			developer.projects.push(req.params.projectId)
+			return developer.save()
+		})
+		.then(() => res.sendStatus(204))
 		.catch(next)
 })
 
@@ -57,6 +80,7 @@ router.patch('/developers/:id', requireToken, removeBlanks, (req, res, next) => 
 		.then(() => res.sendStatus(204))
 		.catch(next)
 })
+
 
 // DESTROY
 // DELETE /developers/5a7db6c74d55bc51bdf39793
