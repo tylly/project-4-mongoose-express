@@ -53,7 +53,7 @@ router.post('/developers', requireToken, (req, res, next) => {
 })
 
 router.patch('/developers/addProj/:projectId/:devId', requireToken, removeBlanks, (req, res, next) => {
-	delete req.body.developer.owner
+	//delete req.body.developer.owner
 
 	Developer.findById(req.params.devId)
 		.then(handle404)
