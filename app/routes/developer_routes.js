@@ -51,6 +51,22 @@ router.post('/developers', requireToken, (req, res, next) => {
 		})
 		.catch(next)
 })
+//Add project to dev
+//Patch /developer/addProj/:projectId/:devId
+router.patch('/developers/addProj/:projectId/:devId', requireToken, removeBlanks, (req, res, next) => {
+	//delete req.body.developer.owner
+	console.log('Project ID in backend\n', req.params.projectId, '\n devID in backend\n', req.params.devId)
+	Developer.findById(req.params.devId)
+		.then(handle404)
+		.then((developer) => {
+			requireOwnership(req, developer)
+			developer.projects.push(req.params.projectId)
+			console.log('DEVELOPER in backend', developer)
+			return developer.save()
+		})
+		.then(() => res.sendStatus(204))
+		.catch(next)
+})
 
 // UPDATE
 // PATCH /developers/5a7db6c74d55bc51bdf39793

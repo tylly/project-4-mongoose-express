@@ -8,6 +8,7 @@ const developerSchema = new Schema(
 		},
 		linkedin: String,
 		github: String,
+		portfolio: String,
 		projects: [{
 			type: Schema.Types.ObjectId,
 			ref: "Project",
