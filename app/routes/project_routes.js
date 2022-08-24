@@ -82,7 +82,8 @@ router.patch( "/projects/:id", requireToken, removeBlanks, (req, res, next) => {
     // if the client attempts to change the `owner` property by including a new
     // owner, prevent that by deleting that key/value pair
     delete req.body.project.owner
-
+    console.log('req.params\n', req.params)
+    console.log('reqbody\n', req.body)
     Project.findById(req.params.id)
       .then(handle404)
       .then((project) => {
