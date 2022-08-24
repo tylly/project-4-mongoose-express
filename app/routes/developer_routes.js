@@ -13,6 +13,7 @@ const router = express.Router()
 router.get('/developers', (req, res, next) => {
     console.log('im in the index route')
 	Developer.find({})
+		.populate('projects')
 		.then((developers) => {
 			return developers.map((developer) => developer.toObject())
 		})
