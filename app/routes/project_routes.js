@@ -34,6 +34,7 @@ router.get("/projects", (req, res, next) => {
   //if we wanted to protect resources we could add that back in between
   //route and callback as second argument
   Project.find()
+    .populate('developers')
     .then((projects) => {
       // `projects` will be an array of Mongoose documents
       // we want to convert each one to a POJO, so we use `.map` to
@@ -51,7 +52,7 @@ router.get("/projects", (req, res, next) => {
 router.get("/projects/:id", (req, res, next) => {
   // req.params.id will be set based on the `:id` in the route
   Project.findById(req.params.id)
- 
+    .populate('developers')
     .then(handle404)
     // if `findById` is succesful, respond with 200 and "project" JSON
     .then((project) =>
