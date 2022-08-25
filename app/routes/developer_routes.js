@@ -53,11 +53,14 @@ router.post('/developers', requireToken, (req, res, next) => {
 		.catch(next)
 })
 //Add project to dev
-//Patch /developer/addProj/:projectId/:devId
-router.patch('/developers/addProj/:projectId/:devId', requireToken, removeBlanks, (req, res, next) => {
+//Patch /developer/addProj/:projectId
+router.patch('/developers/addProj/:projectId', requireToken, removeBlanks, (req, res, next) => {
+	console.log('Are we even hitting this???=======>>>>>')
 	//delete req.body.developer.owner
-	console.log('Project ID in backend\n', req.params.projectId, '\n devID in backend\n', req.params.devId)
-	Developer.findById(req.params.devId)
+	console.log('Project ID in backend\n', req.params.projectId, )
+	console.log('req.body', req.body)
+	req.body.developers.forEach(devId => {
+		Developer.findById(devId)
 		.then(handle404)
 		.then((developer) => {
 			requireOwnership(req, developer)
@@ -67,21 +70,24 @@ router.patch('/developers/addProj/:projectId/:devId', requireToken, removeBlanks
 		})
 		.then(() => res.sendStatus(204))
 		.catch(next)
+		
+	});
+	
 })
 
-router.patch('/developers/addProj/:projectId/:devId', requireToken, removeBlanks, (req, res, next) => {
-	//delete req.body.developer.owner
+// router.patch('/developers/addProj/:projectId/:devId', requireToken, removeBlanks, (req, res, next) => {
+// 	//delete req.body.developer.owner
 
-	Developer.findById(req.params.devId)
-		.then(handle404)
-		.then((developer) => {
-			requireOwnership(req, developer)
-			developer.projects.push(req.params.projectId)
-			return developer.save()
-		})
-		.then(() => res.sendStatus(204))
-		.catch(next)
-})
+// 	Developer.findById(req.params.devId)
+// 		.then(handle404)
+// 		.then((developer) => {
+// 			requireOwnership(req, developer)
+// 			developer.projects.push(req.params.projectId)
+// 			return developer.save()
+// 		})
+// 		.then(() => res.sendStatus(204))
+// 		.catch(next)
+// })
 
 // UPDATE
 // PATCH /developers/5a7db6c74d55bc51bdf39793
