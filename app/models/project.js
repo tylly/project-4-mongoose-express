@@ -23,7 +23,7 @@ const projectSchema = new Schema(
     developers: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: "Developer",
-      required: false,
+      required: true,
     }],
     likes:[],
     owner: {
