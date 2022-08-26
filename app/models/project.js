@@ -1,5 +1,6 @@
-const { urlencoded } = require("express")
+// const { urlencoded } = require("express")
 const mongoose = require("mongoose")
+const likeSchema = require('./like')
 
 const { Schema, model } = mongoose
 
@@ -24,6 +25,7 @@ const projectSchema = new Schema(
       ref: "Developer",
       required: false,
     }],
+    likes:[],
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
