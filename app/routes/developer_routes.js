@@ -25,6 +25,7 @@ router.get('/developers', (req, res, next) => {
 // GET /developers/5a7db6c74d55bc51bdf39793
 router.get('/developers/:id', (req, res, next) => {
 	Developer.findById(req.params.id)
+		.populate('projects')
 		.then(handle404)
 		.then((developer) => res.status(200).json({ developer: developer.toObject() }))
 		.catch(next)
