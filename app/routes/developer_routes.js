@@ -62,15 +62,15 @@ router.patch('/developers/addProj/:projectId', requireToken, removeBlanks, (req,
 	console.log('req.body', req.body)
 	req.body.developers.forEach(devId => {
 		Developer.findById(devId)
-		.then(handle404)
-		.then((developer) => {
-			requireOwnership(req, developer)
-			developer.projects.push(req.params.projectId)
-			console.log('DEVELOPER in backend', developer)
-			return developer.save()
-		})
-		.then(() => res.sendStatus(204))
-		.catch(next)	
+			.then(handle404)
+			.then((developer) => {
+				requireOwnership(req, developer)
+				developer.projects.push(req.params.projectId)
+				console.log('DEVELOPER in backend', developer)
+				return developer.save()
+			})
+			.then(() => res.sendStatus(204))
+			.catch(next)	
 	})
 })
 
