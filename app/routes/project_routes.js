@@ -76,6 +76,29 @@ router.post("/projects/", requireToken, (req, res, next) => {
   .catch(next)
 })
 
+// UPDATE - Add developer to project
+// PATCH /projects/5a7db6c74d55bc51bdf39793
+router.patch( "/projects/addDev/:projectId", requireToken, removeBlanks, (req, res, next) => {
+  console.log('ADD DEV TO PROJECT ====>> req.params\n', req.params)
+  console.log('reqbody ADD DEV TO PROJ===>>\n', req.body)
+  Project.findById(req.params.projectId)
+    .then(handle404)
+    .then((project) => {
+      // pass the `req` object and the Mongoose record to `requireOwnership`
+      // it will throw an error if the current user isn't the owner
+      requireOwnership(req, project)
+      req.body.developers.forEach(dev => {
+        project.developers.push(dev)
+      })
+      return project.save()
+    })
+    // if that succeeded, return 204 and no JSON
+    .then(() => res.sendStatus(204))
+    // if an error occurs, pass it to the handler
+    .catch(next)
+}
+)
+
 // UPDATE
 // PATCH /projects/5a7db6c74d55bc51bdf39793
 router.patch( "/projects/:id", requireToken, removeBlanks, (req, res, next) => {
