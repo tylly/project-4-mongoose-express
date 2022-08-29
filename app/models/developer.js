@@ -6,6 +6,7 @@ const developerSchema = new Schema(
 			type: String,
 			required: true,
 		},
+		avatar: String,
 		linkedin: String,
 		github: String,
 		portfolio: String,
