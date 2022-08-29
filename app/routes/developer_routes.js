@@ -7,6 +7,9 @@ const requireOwnership = customErrors.requireOwnership
 const removeBlanks = require('../../lib/remove_blank_fields')
 const requireToken = passport.authenticate('bearer', { session: false })
 const router = express.Router()
+const request = require('request-promise')
+const cheerio = require('cheerio')
+const axios = require('axios')
 
 // INDEX
 // GET /developers
@@ -46,12 +49,34 @@ router.post('/developers', requireToken, (req, res, next) => {
     console.log('Inside the create route')
     console.log('reqbody', req.body)
 	req.body.developer.owner = req.user.id
-
-	Developer.create(req.body.developer)
-		.then((developer) => {
-			res.status(201).json({ developer: developer.toObject() })
+	req.body.developer.avatar = null
+	let avatar
+	const getAvatar = async () => {
+    await axios.get(req.body.developer.github)
+        .then(res => {
+            const $ = cheerio.load(res.data)
+            const profileImgLoad = $(".avatar.avatar-user.width-full")
+            avatar = profileImgLoad[0].attribs.src
+            console.log('av', avatar)
+            console.log(profileImgLoad.attribs)
+        })
+	}
+	getAvatar()
+		.then(() => {
+			console.log('getavatar then', avatar)
+			req.body.developer.avatar = avatar
+			console.log('reqbody with avatar\n', req.body)
+			console.log('req.body.developer before create\n', req.body.developer)
+			Developer.create(req.body.developer)
+				.then((developer) => {
+					res.status(201).json({ developer: developer.toObject() })
+				})
+				.catch(next)
+				})
+		.catch(err => {
+			console.log(err)
 		})
-		.catch(next)
+	
 })
 
 //Add project to dev
@@ -129,5 +154,31 @@ router.delete('/developers/:id', requireToken, (req, res, next) => {
 		.then(() => res.sendStatus(204))
 		.catch(next)
 })
+
+// router.get("/developers/getProfilePic/:id", (req, res, next) => {
+// 	Developer.findById(req.params.id)
+// 		.then(handle404)
+// 		.then((developer) => {
+// 			let avatar
+// 			request(developer.github, (error, response, html) => {
+// 				if (!error && response.statusCode == 200) {
+// 				const loadGitPfp = cheerio.load(html);
+
+// 				const profileImgLoad = loadGitPfp(".avatar.avatar-user.width-full");
+// 				// console.log(profileImgLoad)
+// 				avatar = profileImgLoad[0].attribs.src
+// 				console.log(
+// 					"this is the consolelog======>>\n",
+// 					profileImgLoad[0].attribs.src
+// 				);
+// 				}
+// 			});
+// 			res.status(200).json({ developer: developer.toObject() });
+// 			})
+// 			developer.avatar = avatar
+// 			return developer.save()
+// 		.catch(next);
+// });
+
 
 module.exports = router
